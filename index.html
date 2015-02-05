@@ -3257,7 +3257,7 @@
       $(document).ready(function(e) {
 
         var grant_id,
-          allocations = [];
+          params = [];
 
         try {
 
@@ -3283,17 +3283,16 @@
             'administrative_cost',
             'leasing',
             'hmis',
-            'rental_assistance'
+            'rental_assistance',
+            'total'
           ];
 
 
-          var queryParam;
+          var queryValue;
 
           params.forEach(function(val, index) {
 
             queryValue = parseParam(val);
-
-            console.log(index, val, queryValue);
 
             if (queryValue) {
               $('#'+val).text(queryValue);
