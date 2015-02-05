@@ -3290,7 +3290,9 @@
 
           allocations.forEach(function(index, val) {
 
-            queryValue = parseValue(val);
+            queryValue = parseParam(val);
+
+            console.log(index, val, queryValue);
 
             if (queryValue) {
               $('#'+val).text(queryValue);
