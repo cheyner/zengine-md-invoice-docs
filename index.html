@@ -1435,14 +1435,8 @@
                 <TD colspan=3 class="tr7 td31">
                     <P class="p4 ft14">SNAP HPAC</P>
                 </TD>
-                <TD class="tr7 td7">
-                    <P class="p0 ft8" id="service_period">June-14</P>
-                </TD>
-                <TD class="tr7 td8">
-                    <P class="p0 ft8">&nbsp;</P>
-                </TD>
-                <TD class="tr7 td32">
-                    <P class="p0 ft8">&nbsp;</P>
+                <TD colspan="3" class="tr7 td7" style="text-align:center; font-size:14px; font-weight: bold;">
+                    <span id="service_period"></span>
                 </TD>
                 <TD class="tr7 td5">
                     <P class="p0 ft8">&nbsp;</P>
@@ -1732,7 +1726,7 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD colspan=3 class="tr14 td11">
-                    <P class="p4 ft12"><span id="grant_id"></span></P>
+                    <P class="p4 ft12" style="font-weight:bold;font-size:14px;"><span id="grant_id"></span></P>
                 </TD>
                 <TD class="tr14 td12">
                     <P class="p0 ft8">&nbsp;</P>
@@ -3268,32 +3262,34 @@
         try {
 
           var grant_id = parseParam('grant_id');
+          var service_period = parseParam('service_period');
 
           if (!grant_id) {
-
             throw new Error('The Grant ID could not be found!');
-
-          } else {
-
-            $('#grant_id').text(grant_id);
-
-            params = [
-              'supportive_services',
-              'operations',
-              'provider_admin',
-              'homeless_trust_admin',
-              'leasing',
-              'hmis',
-              'rental_assistance'
-            ];
-
-            allocations.forEach(function(index, val) {
-
-              console.log(val);
-
-            });
-
           }
+
+          if (!service_period) {
+            throw new Error('The Service Period could not be found!');
+          }
+
+          $('#grant_id').text(grant_id);
+          $('#service_period').text(service_period);
+
+          params = [
+            'supportive_services',
+            'operations',
+            'provider_admin',
+            'homeless_trust_admin',
+            'leasing',
+            'hmis',
+            'rental_assistance'
+          ];
+
+          allocations.forEach(function(index, val) {
+
+            console.log(val);
+
+          });
 
         } catch(err) {
 
