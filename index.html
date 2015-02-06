@@ -3309,11 +3309,11 @@
             var cost_details = '';
 
             if (administrative.provider) {
-                cost_details += ('Provider: ' + administrative.provider.toFixed(2) + ' ');
+                cost_details += ('Provider: ' + administrative.provider + ' ');
             }
 
             if (administrative.homeless_trust) {
-                cost_details += ('Homeless Trust: ' + administrative.homeless_trust.toFixed(2));
+                cost_details += ('Homeless Trust: ' + administrative.homeless_trust);
             }
 
             $('#administrative_cost_details').text(cost_details);
@@ -3322,6 +3322,8 @@
 
 
         } catch(err) {
+
+          console.log(err);
 
           alert(err.message);
 
