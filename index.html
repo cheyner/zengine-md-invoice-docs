@@ -2235,7 +2235,7 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="operating_cost"></P>
+                    <P class="p12 ft15" id="operations"></P>
                 </TD>
             </TR>
             <TR>
@@ -3278,8 +3278,6 @@
           params = [
             'supportive_services',
             'operations',
-            'provider_admin',
-            'homeless_trust_admin',
             'administrative_cost',
             'leasing',
             'hmis',
@@ -3295,10 +3293,33 @@
             queryValue = parseParam(val);
 
             if (queryValue) {
+
               $('#'+val).text(queryValue);
             }
 
           });
+
+          var administrative = {
+            provider: parseParam('provider_admin'),
+            homeless_trust: parseParam('homeless_trust_admin')
+          };
+
+          if (administrative.provider || administrative.homeless_trust) {
+
+            var cost_details = '';
+
+            if (administrative.provider) {
+                cost_details += ('Provider: ' + administrative.provider.toFixed(2) + ' ');
+            }
+
+            if (administrative.homeless_trust) {
+                cost_details += ('Homeless Trust: ' + administrative.homeless_trust.toFixed(2));
+            }
+
+            $('#administrative_cost_details').text(cost_details);
+
+          }
+
 
         } catch(err) {
 
