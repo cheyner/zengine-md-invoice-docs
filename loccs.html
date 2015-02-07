@@ -2235,7 +2235,7 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="operating_cost"></P>
+                    <P class="p12 ft15" id="operations"></P>
                 </TD>
             </TR>
             <TR>
@@ -2417,17 +2417,8 @@
                 <TD class="tr19 td74">
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
-                <TD colspan=10 class="tr19 td80">
-                    <P class="p9 ft15">Administrative Cost <span id="administrative_cost_details"></span></P>
-                </TD>
-                <TD class="tr19 td7">
-                    <P class="p0 ft8">&nbsp;</P>
-                </TD>
-                <TD class="tr19 td8">
-                    <P class="p0 ft8">&nbsp;</P>
-                </TD>
-                <TD class="tr19 td4">
-                    <P class="p0 ft8">&nbsp;</P>
+                <TD colspan=13 class="tr19 td80">
+                    <P class="p9 ft15">Administrative Cost <span style="font-weight:bold" id="administrative_cost_details"></span></P>
                 </TD>
                 <TD class="tr19 td75">
                     <P class="p0 ft8">&nbsp;</P>
@@ -3257,7 +3248,7 @@
       $(document).ready(function(e) {
 
         var grant_id,
-          allocations = [];
+          params = [];
 
         try {
 
@@ -3278,27 +3269,52 @@
           params = [
             'supportive_services',
             'operations',
-            'provider_admin',
-            'homeless_trust_admin',
             'administrative_cost',
             'leasing',
             'hmis',
-            'rental_assistance'
+            'rental_assistance',
+            'voucher_total'
           ];
 
-          var queryParam;
 
-          allocations.forEach(function(index, val) {
+          var queryValue;
 
-            queryValue = parseValue(val);
+          params.forEach(function(val, index) {
+
+            queryValue = parseParam(val);
 
             if (queryValue) {
+
               $('#'+val).text(queryValue);
             }
 
           });
 
+          var administrative = {
+            provider: parseParam('provider_admin'),
+            homeless_trust: parseParam('homeless_trust_admin')
+          };
+
+          if (administrative.provider || administrative.homeless_trust) {
+
+            var cost_details = '';
+
+            if (administrative.provider) {
+                cost_details += ('Provider: ' + administrative.provider + ' ');
+            }
+
+            if (administrative.homeless_trust) {
+                cost_details += ('Homeless Trust: ' + administrative.homeless_trust);
+            }
+
+            $('#administrative_cost_details').text(cost_details);
+
+          }
+
+
         } catch(err) {
+
+          console.log(err);
 
           alert(err.message);
 
