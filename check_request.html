@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html ng-app="mdDocApp" class="ng-scope">
+
+  <head>
+      <base href="/">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=8">
+      <title>Miami Dade Check Request Form</title>
+
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+      <script type="text/javascript" src="js/angular.min.js"></script>
+      <script type="text/javascript" src="js/angular-route.min.js"></script>
+      <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+      <script type="text/javascript" src="js/controllers.js"></script>
+
+      <style>
+        .table {
+          width: 500px;
+        }
+
+        .table th {
+          width: 200px;
+        }
+
+        .notes {
+          width:500px;
+          border:1px solid #ddd;
+          height:70px;
+          margin-bottom:25px;
+        }
+
+        .signature-container {
+          clear:left;
+          padding: 10px 0 0;
+        }
+
+        .who {
+          width: 100px;
+          text-align: right;
+        }
+
+        .who, .signature, .date  {
+          float: left;
+        }
+
+        .signature, .date {
+          margin: 20px 10px;
+          border-top: 1px solid #000;
+          width: 300px;
+          text-align: center;
+        }
+
+        .date {
+          width: 200px;
+        }
+
+      </style>
+
+  </head>
+
+  <body ng-controller="DataCtrl" class="ng-scope">
+
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-sm-12">
+
+          <h2 style="padding-left:120px;position:relative;">
+            <img src="logo-miami-dade.png" style="width:100px;position:absolute;top:0;left:0;" />
+            Miami Dade County Homeless Trust
+            <br /><small>Check Request Form</small>
+          </h2>
+
+
+
+          <table class="table table-bordered">
+
+            <tr>
+              <th>Provider Name</th>
+              <td>
+                {{params.provider_name}}
+              </td>
+            </tr>
+
+            <tr>
+              <th>Provider Mailing Address</th>
+              <td>
+                {{params.provider_address}}
+              </td>
+            </tr>
+
+          </table>
+
+          <table class="table table-bordered">
+
+            <tr>
+              <th>Grant ID</th>
+              <td>
+                {{params.grant_id}}
+              </td>
+            </tr>
+
+            <tr>
+              <th>Grant Start Date</th>
+              <td>
+                {{params.grant_start}}
+              </td>
+            </tr>
+
+          </table>
+
+          <table class="table table-bordered">
+
+            <tr>
+              <th>Service Period</th>
+              <td>
+                {{params.service_period}}
+              </td>
+            </tr>
+
+            <tr>
+              <th>Invoice Received</th>
+              <td>
+                {{params.received}}
+              </td>
+            </tr>
+
+            <tr>
+              <th>Is Adjustment?</th>
+              <td>
+                <input type="checkbox" ng-model="params.is_adjustment" ng-true-value="'1'" />
+              </td>
+            </tr>
+
+            <tr>
+              <th>Check Request Amount</th>
+              <td>
+                {{params.request_amount}}
+              </td>
+            </tr>
+
+          </table>
+
+          <h4>Check Type Notes</h4>
+          <div class="notes">
+
+          </div>
+
+          <h4>Special Handling Notes</h4>
+          <div class="notes">
+
+          </div>
+
+              <div class="signature-container clearfix">
+
+                <span class="who">Submitted by:</span>
+                <span class="signature">Signature</span>
+                <span class="date">Date</span>
+
+              </div>
+
+              <div class="signature-container clearfix">
+
+                <span class="who">Approved by:</span>
+                <span class="signature">Signature</span>
+                <span class="date">Date</span>
+
+              </div>
+
+              <div class="signature-container clearfix">
+
+                <span class="who">C.F.O.:</span>
+                <span class="signature">Signature</span>
+                <span class="date">Date</span>
+
+              </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+
+</html>
