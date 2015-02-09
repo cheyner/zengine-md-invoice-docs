@@ -14,6 +14,15 @@
       <script type="text/javascript" src="js/controllers.js"></script>
 
       <style>
+        input {
+          border: 0;
+          width: 100%;
+        }
+
+        h5 {
+          margin-bottom:4px;
+        }
+
         .table {
           width: 500px;
         }
@@ -79,14 +88,14 @@
             <tr>
               <th>Provider Name</th>
               <td>
-                {{params.provider_name}}
+                <input type="text" ng-model="params.provider_name" />
               </td>
             </tr>
 
             <tr>
               <th>Provider Mailing Address</th>
               <td>
-                {{params.provider_address}}
+                <input type="text" ng-model="params.provider_address" />
               </td>
             </tr>
 
@@ -97,14 +106,14 @@
             <tr>
               <th>Grant ID</th>
               <td>
-                {{params.grant_id}}
+                <input type="text" ng-model="params.grant_id" />
               </td>
             </tr>
 
             <tr>
               <th>Grant Start Date</th>
               <td>
-                {{params.grant_start}}
+                <input type="text" ng-model="params.grant_start" />
               </td>
             </tr>
 
@@ -115,14 +124,14 @@
             <tr>
               <th>Service Period</th>
               <td>
-                {{params.service_period}}
+                <input type="text" ng-model="params.service_period" />
               </td>
             </tr>
 
             <tr>
               <th>Invoice Received</th>
               <td>
-                {{params.received}}
+                <input type="text" ng-model="params.received" />
               </td>
             </tr>
 
@@ -136,21 +145,17 @@
             <tr>
               <th>Check Request Amount</th>
               <td>
-                {{params.request_amount | currency}}
+                <input type="text" ng-model="params.request_amount" currency>
               </td>
             </tr>
 
           </table>
 
-          <h4>Check Type Notes</h4>
-          <div class="notes">
+          <h5>Check Type Notes</h5>
+          <textarea class="notes"></textarea>
 
-          </div>
-
-          <h4>Special Handling Notes</h4>
-          <div class="notes">
-
-          </div>
+          <h5>Special Handling Notes</h5>
+          <textarea class="notes"></textarea>
 
               <div class="signature-container clearfix">
 
