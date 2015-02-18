@@ -2,6 +2,13 @@ body {
         margin-top: 0px;
         margin-left: 0px;
     }
+
+    input {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
     #page_1 {
         position: relative;
         overflow: hidden;
