@@ -7,12 +7,14 @@
     <TITLE>Federal LOCCS Form</TITLE>
 
     <link rel="stylesheet" type="text/css" href="css/loccs.css">
-
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
 
 </HEAD>
 
-<BODY>
+<BODY ng-controller="DataCtrl" class="ng-scope">
     <DIV id="page_1">
         <DIV id="dimg1">
             <IMG src="27053-a_LOCCS_images/27053-a_LOCCS1x1.jpg" id="img1">
@@ -266,7 +268,7 @@
                     <P class="p4 ft14">SNAP HPAC</P>
                 </TD>
                 <TD colspan="3" class="tr7 td7" style="text-align:center; font-size:14px; font-weight: bold;">
-                    <span id="service_period"></span>
+                    <input type="text" ng-model="params.service_period" />
                 </TD>
                 <TD class="tr7 td5">
                     <P class="p0 ft8">&nbsp;</P>
@@ -556,7 +558,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD colspan=3 class="tr14 td11">
-                    <P class="p4 ft12" style="font-weight:bold;font-size:14px;"><span id="grant_id"></span></P>
+                    <P class="p4 ft12" style="font-weight:bold;font-size:14px;">
+                        <input type="text" ng-model="params.grant_id" />
+                    </P>
                 </TD>
                 <TD class="tr14 td12">
                     <P class="p0 ft8">&nbsp;</P>
@@ -730,7 +734,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr13 td3">
-                    <P class="p12 ft15" id="acquisition"></P>
+                    <P class="p12 ft15" id="acquisition">
+                        <input type="text" ng-model="params.acquisition" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -797,7 +803,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="rehabilitation"></P>
+                    <P class="p12 ft15" id="rehabilitation">
+                        <input type="text" ng-model="params.rehabilitation" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -864,7 +872,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="new_construction"></P>
+                    <P class="p12 ft15" id="new_construction">
+                        <input type="text" ng-model="params.new_construction" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -931,7 +941,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr13 td3">
-                    <P class="p12 ft15" id="substantial_rehabilitation"></P>
+                    <P class="p12 ft15" id="substantial_rehabilitation">
+                        <input type="text" ng-model="params.substantial_rehabilitation" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -998,7 +1010,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="moderate_rehabilitation"></P>
+                    <P class="p12 ft15" id="moderate_rehabilitation">
+                        <input type="text" ng-model="params.moderate_rehabilitation" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1065,7 +1079,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="operations"></P>
+                    <P class="p12 ft15" id="operations">
+                        <input type="text" ng-model="params.operations" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1132,7 +1148,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="rental_assistance"></P>
+                    <P class="p12 ft15" id="rental_assistance">
+                        <input type="text" ng-model="params.rental_assistance" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1199,7 +1217,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="supportive_services"></P>
+                    <P class="p12 ft15" id="supportive_services">
+                        <input type="text" ng-model="params.supportive_services" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1257,7 +1277,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="administrative_cost"></P>
+                    <P class="p12 ft15" id="administrative_cost">
+                        <input type="text" ng-model="params.administrative_cost" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1324,7 +1346,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="child_care"></P>
+                    <P class="p12 ft15" id="child_care">
+                        <input type="text" ng-model="params.child_care" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1391,7 +1415,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr19 td3">
-                    <P class="p12 ft15" id="employment_assistance"></P>
+                    <P class="p12 ft15" id="employment_assistance">
+                        <input type="text" ng-model="params.employment_assistance" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1458,7 +1484,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr0 td3">
-                    <P class="p12 ft15" id="relocation"></P>
+                    <P class="p12 ft15" id="relocation">
+                        <input type="text" ng-model="params.relocation" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1525,7 +1553,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr0 td3">
-                    <P class="p12 ft15" id="leasing"></P>
+                    <P class="p12 ft15" id="leasing">
+                        <input type="text" ng-model="params.leasing" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1592,7 +1622,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr0 td3">
-                    <P class="p12 ft15" id="repair_and_maintenance"></P>
+                    <P class="p12 ft15" id="repair_and_maintenance">
+                        <input type="text" ng-model="params.repair_and_maintenance" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1659,7 +1691,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr0 td3">
-                    <P class="p12 ft15" id="prevention"></P>
+                    <P class="p12 ft15" id="prevention">
+                        <input type="text" ng-model="params.prevention" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1726,7 +1760,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr0 td3">
-                    <P class="p12 ft15" id="capacity_building"></P>
+                    <P class="p12 ft15">
+                        <input type="text" ng-model="params.capacity_building" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1793,7 +1829,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr0 td3">
-                    <P class="p12 ft15" id="other"></P>
+                    <P class="p12 ft15">
+                        <input type="text" ng-model="params.other" />
+                    </P>
                 </TD>
             </TR>
             <TR>
@@ -1920,7 +1958,9 @@
                     <P class="p0 ft8">&nbsp;</P>
                 </TD>
                 <TD class="tr0 td3">
-                    <P class="p12 ft26"><span id="voucher_total">0</span></P>
+                    <P class="p12 ft26">
+                        <input type="text" ng-model="params.voucher_total" />
+                    </P>
                 </TD>
             </TR>
             <TR>
