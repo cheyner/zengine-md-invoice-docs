@@ -10,10 +10,26 @@ input {
     padding: 0;
 }
 
+#grant_id {
+    position: absolute;
+    top: 320px;
+    left: 43px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#service_period {
+    position: absolute;
+    top: 247px;
+    left: 354px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
 #amount-inputs {
     position: absolute;
-    top: 250px;
-    right: 21px;
+    top: 357px;
+    right: 30px;
 }
 
 #amount-inputs > div {
@@ -25,5 +41,5 @@ input {
 #amount-inputs > div > input {
     text-align: right;
     background-color: transparent;
-    height: 20px;
+    height: 28px;
 }

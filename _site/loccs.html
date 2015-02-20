@@ -15,9 +15,12 @@
 
 </HEAD>
 
-<BODY ng-controller="DataCtrl" class="ng-scope" style="width:670px;">
+<BODY ng-controller="DataCtrl" class="ng-scope" style="width:950px;">
 
-    <img src="loccs-form.jpg" style="width:670px;" />
+    <img src="loccs-form.jpg" style="width:950px;" />
+
+    <input type="text" ng-model="params.service_period" id="service_period" />
+    <input type="text" ng-model="params.grant_id" id="grant_id" />
 
     <div id="amount-inputs">
 
@@ -98,7 +101,7 @@
         </div>
 
         <div>
-            <input type="text" ng-model="params.voucher_total" style="height:16px;font-weight:bold;" currency />
+            <input type="text" ng-model="params.voucher_total" style="height:24px;font-weight:bold;" currency />
         </div>
 
     </div>
