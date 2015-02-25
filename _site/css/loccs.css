@@ -8,6 +8,7 @@ input {
     border: 0;
     margin: 0;
     padding: 0;
+    background: transparent;
 }
 
 #grant_id {
@@ -16,6 +17,7 @@ input {
     left: 43px;
     font-weight: bold;
     font-size: 14px;
+    width:300px;
 }
 
 #service_period {
@@ -42,4 +44,5 @@ input {
     text-align: right;
     background-color: transparent;
     height: 28px;
+    width: 150px;
 }
