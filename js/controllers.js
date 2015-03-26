@@ -8,8 +8,6 @@
 
       $scope.params = $location.search();
 
-      console.log($scope.params);
-
     })
 
     .config(function($routeProvider, $locationProvider) {
