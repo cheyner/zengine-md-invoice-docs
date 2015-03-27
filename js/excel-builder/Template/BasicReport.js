@@ -2,13 +2,13 @@ define(['../Excel/Workbook', '../Excel/Table'], function (Workbook, Table) {
 	var Template = function (worksheetConstructorSettings) {
 		this.workbook = new Workbook();
 		this.stylesheet = this.workbook.getStyleSheet();
-		
+
 		this.columns = {};
-		
+
 		this.predefinedStyles = {
-			
+
 		};
-		
+
 		this.predefinedFormatters = {
 			date: this.stylesheet.createSimpleFormatter('date'),
 			currency: this.stylesheet.createFormat({format: "$ #,##0.00;$ #,##0.00;-", font: {color: "FFE9F50A"}}),
@@ -41,13 +41,13 @@ define(['../Excel/Workbook', '../Excel/Table'], function (Workbook, Table) {
 		prepare: function () {
 			return this.workbook;
 		},
-		
+
 		setData: function (worksheetData) {
 			this.worksheet.setData(worksheetData);
 			this.data = worksheetData;
 			this.table.setReferenceRange([1, 1], [this.columns.length, worksheetData.length]);
 		},
-		
+
 		setColumns: function (columns) {
 			this.columns = columns;
 			this.worksheet.setColumns(columns);

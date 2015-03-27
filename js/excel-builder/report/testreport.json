@@ -1,0 +1,35 @@
+{"data": {
+  "grants":
+    [
+      {
+        "id": "ABC-12345",
+        "budget": 1000000,
+        "endDate": "2015-08-08",
+        "comments": "This grant is AOK",
+        "payment_requests": [
+          {
+            "service_period": "June-2014",
+            "created": "2014-07-01",
+            "status": "paid",
+            "drawdown": 15500
+          },
+          {
+            "service_period": "July-2014",
+            "created": "2014-08-01",
+            "status": "paid",
+            "drawdown": 12500
+          },
+          {
+            "service_period": "August-2014",
+            "created": "2014-09-01",
+            "status": "pending",
+            "drawdown": 100000
+          }
+        ],
+        "provider": {
+          "name": "Sunset Contracting"
+        }
+      }
+    ]
+  }
+}
