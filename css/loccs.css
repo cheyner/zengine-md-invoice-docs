@@ -46,6 +46,15 @@ input {
     min-width: 300px;
 }
 
+#snaps {
+    position: absolute;
+    top: 600px;
+    left: 43px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 300px;
+}
+
 #amount-inputs {
     position: absolute;
     top: 357px;
