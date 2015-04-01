@@ -1,28 +1,114 @@
 <html>
     <head>
-        <script type="text/javascript" src="/js/excel-builder/report/jquery-1.11.2.min.js"></script>
-        <script type="text/javascript" src="/js/excel-builder/report/require.js"></script>
-        <script type="text/javascript" src="/js/excel-builder/report/underscore-min.js"></script>
-        <script type="text/javascript" src="/js/excel-builder/report/json2.js"></script>
-        <script type="text/javascript" src="/js/excel-builder/report/downloadify/js/swfobject.js"></script>
-        <script type="text/javascript" src="/js/excel-builder/report/downloadify/js/downloadify.min.js"></script>
+        <base href="https://cheyner.github.io/zengine-md-invoice-docs/">
+        <!-- <base href="http://127.0.0.1:4000/"> -->
+        <script type="text/javascript" src="js/excel-builder/report/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="js/excel-builder/report/require.js"></script>
+        <script type="text/javascript" src="js/excel-builder/report/underscore-min.js"></script>
+        <script type="text/javascript" src="js/excel-builder/report/bootstrap.js"></script>
+        <script type="text/javascript" src="js/excel-builder/report/json2.js"></script>
+        <script type="text/javascript" src="js/excel-builder/report/downloadify/js/swfobject.js"></script>
+        <script type="text/javascript" src="js/excel-builder/report/downloadify/js/downloadify.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic">
     </head>
     <body>
 
-        <div id="" style="margin: 30px auto; width:500px; border: 3px double #ddd; font-family: 'Arimo', sans-serif; background-color: #009; font-size: 36px; text-align: center; color: #fff;">
+        <div class="container">
 
-            <h3 id="status" style="font-weight:normal;">Generating report...</h3>
+            <div class="row">
 
-            <pre id="complete" style="display:none;"><a style="color:#fff;" href="#" id="downloader" download="grant_report.xlsx">Download Report File</a></pre>
+                <div class="col-md-8 col-md-offset-2">
+
+                    <div class="well" style="margin:20px;">
+
+                        <h2>Miami-Dade Report Generator</h2>
+
+                        <div id="auth-alert" class="alert alert-danger" style="display:none;">
+
+                            <p style="margin-bottom:10px;">
+                                To generate reports, we need permission to access your Zengine account.<br />
+                                Please click the button below and login to your Zengine account.
+                            </p>
+
+                            <a class="btn btn-danger" href="https://auth.zenginehq.com/oauth2/v1/authorize?client_id=f11ead3a1a5bcfe11f31b2886904c21bd49c&response_type=token&state=XXXX">Authorize Access to Zengine</a>
+
+                        </div>
+
+                        <div id="error-alert" class="alert alert-danger" style="display:none;">
+
+                            <h3 style="margin-top:0;">Something Went Wrong</h3>
+
+                            <p></p>
+
+                        </div>
+
+                        <form id="report-generator" method="GET">
+
+                            <div class="form-group">
+                                <label for="username">Please input your Zengine username (usually an email address)</label>
+                                <input required="true" class="form-control" id="username" style="max-width:400px;" name="username" type="text" />
+                            </div>
+
+                            <div class="form-group">
+
+                                <button id="initiate" type="submit" class="btn btn-primary btn-lg">Compile Report</button>
+
+                                <button style="display:none;" id="loader" type="button" disabled="true" class="btn btn-default btn-lg"><i class="fa fa-cog fa-spin"></i> Building Report</button>
+
+                                <span id="complete" style="display:none;"><a class="btn btn-success btn-lg" href="#" id="downloader" download="grant_report.xlsx"><i class="fa fa-download"></i> Download Report File</a></span>
+
+                                <button data-toggle="modal" data-target="#info-modal" class="btn btn-default btn-lg"><i class="fa fa-info-circle"></i> Info</button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
+
+        <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">MD Report Generator Tool</h4>
+              </div>`
+              <div class="modal-body">
+
+                <p class="lead">
+                    This tool was designed to help Miami-Dade contract officers generate monthly reports.
+                </p>
+
+                <p>
+                    To use the tool, enter your Zengine username and click "Compile Report".  The tool will generate an Excel file report of Grant and Payment Request data.  Once it has finished, you can click "Download Report File" to download the Excel file to your computer.
+                </p>
+                <p>
+                    The report will include a summary page that includes basic details for all of your grants, as well as individual worksheets for each grant with a listing of each provider payment request.
+                </p>
+                <p class="text-warning" style="margin-bottom:0;">
+                    <i class="fa fa-exclamation-triangle"></i> This tool requires an up-to-date Chrome web browser
+                </p>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
         <script type="text/javascript">
             require.config({
                 paths: {
-                    JSZip: '/js/excel-builder/report/jszip.min',
-                    text: '/js/excel-builder/report/text'
+                    JSZip: 'js/excel-builder/report/jszip.min',
+                    text: 'js/excel-builder/report/text'
                 },
                 shim: {
                     'JSZip': {
@@ -30,19 +116,78 @@
                     }
                 }
             });
-            require(['js/excel-builder/excel-builder', 'js/excel-builder/Template/BasicReport'], function (builder, SummaryReport) {
+            require(['js/excel-builder/excel-builder', 'js/excel-builder/Template/ContractOfficerReport'], function (builder, ContractOfficerReport) {
 
-                var report_data;
+                var params = {},
+                    queryString = location.hash.substring(1),
+                    regex = /([^&=]+)=([^&]*)/g,
+                    m;
 
-                var parsePaymentRequests = function(payment_requests) {
+                while (m = regex.exec(queryString)) {
+                    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+                }
+
+                var Reporter = {
+                    grantFormId: 14029,
+                    paymentRequestFormId: 14028,
+                    username: null,
+                    workbook: null,
+                    fieldMap: {
+                        grant: {
+                            id: 'field124709',
+                            type: 'field124712',
+                            contract_user_id: 'field124711',
+                            provider_id: 'field124714',
+                            project: 'field124713',
+                            budget: 'field124721',
+                            status: 'field124716',
+                            starts: 'field124717',
+                            ends: 'field124718',
+                            executed: 'field124719',
+                            is_archived: 'field125149',
+                            comments: 'field175704',
+                            allocation_coc_costs: 'field153172',
+                            allocation_rental_assistance: 'field125141',
+                            allocation_hmis: 'field125142',
+                            allocation_leasing: 'field125143',
+                            allocation_supportive_services: 'field125144',
+                            allocation_operations: 'field125145',
+                            allocation_provider_fee: 'field125146',
+                            allocation_md_fee: 'field125147'
+                        },
+                        payment_request: {
+                            grant_id: 'field124723',
+                            status: 'field124726',
+                            service_period: 'field141058',
+                            received: 'field124733',
+                            check_request: 'field124728',
+                            md_fee: 'field124729',
+                            drawdown: 'field124825',
+                            drawdown_date: 'field124734',
+                            warrant_number: 'field125176',
+                            is_adjustment: 'field125151',
+                            has_deficiency: 'field125150',
+                            allocation_coc_costs: 'field153171',
+                            allocation_rental_assistance: 'field125155',
+                            allocation_hmis: 'field125156',
+                            allocation_leasing: 'field125157',
+                            allocation_supportive_services: 'field125158',
+                            allocation_operations: 'field125159',
+                            allocation_provider_fee: 'field125160'
+                        }
+                    }
+
+                };
+
+                Reporter.paymentRequestStats = function(payment_requests) {
 
                     var stats = {
                             lastPaid: {
-                                created: null,
+                                received: null,
                                 servicePeriod: null
                             },
                             lastInvoiced: {
-                                created: null,
+                                received: null,
                                 servicePeriod: null
                             },
                             drawnTotal: 0
@@ -51,45 +196,50 @@
 
                     _.each(payment_requests, function(payment, index) {
 
-                        request_date = new Date(payment.created).getTime();
+                        request_date = new Date(payment[Reporter.fieldMap.payment_request.received]).getTime();
 
-                        if (payment.status === 'paid') {
+                        if (payment[Reporter.fieldMap.payment_request.status] === 'Paid') {
 
-                            stats.drawnTotal += payment.drawdown;
+                            stats.drawnTotal += Number(payment[Reporter.fieldMap.payment_request.drawdown]);
 
-                            if (!stats.lastPaid.created || stats.lastPaid.created < request_date) {
-                                stats.lastPaid.created = request_date;
-                                stats.lastPaid.servicePeriod = payment.service_period;
+                            if (!stats.lastPaid.received || stats.lastPaid.received < request_date) {
+                                stats.lastPaid.received = request_date;
+                                stats.lastPaid.servicePeriod = payment[Reporter.fieldMap.payment_request.service_period];
                             }
 
-                        } else if (!stats.lastInvoiced.created || stats.lastInvoiced.created < request_date) {
-                            stats.lastInvoiced.created = request_date;
-                            stats.lastInvoiced.servicePeriod = payment.service_period;
+                        } else if (!stats.lastInvoiced.received || stats.lastInvoiced.received < request_date) {
+
+                            stats.lastInvoiced.received = request_date;
+                            stats.lastInvoiced.servicePeriod = payment[Reporter.fieldMap.payment_request.service_period];
+
                         }
 
                     });
+
+                    console.log('stats', stats);
 
                     return stats;
 
                 }
 
-                var prepareReportData = function(data) {
+                Reporter.reportSummaryData = function(grants) {
 
                     var parsed = [],
                         payment_request_stats;
 
-                    _.each(data.grants, function(grant, index) {
+                    _.each(grants, function(grant, index) {
 
-                        payment_request_stats = parsePaymentRequests(grant.payment_requests);
+                        payment_request_stats = Reporter.paymentRequestStats(grant.payment_requests);
 
                         parsed.push([
-                            grant.id,
-                            grant.provider.name,
-                            grant.budget,
-                            payment_request_stats.drawnTotal,
-                            (grant.budget - payment_request_stats.drawnTotal),
-                            grant.endDate,
-                            grant.comments,
+                            grant[Reporter.fieldMap.grant.id],
+                            grant[Reporter.fieldMap.grant.provider_id].name,
+                            grant[Reporter.fieldMap.grant.project],
+                            {value:Number(grant[Reporter.fieldMap.grant.budget]), metadata:{style: Reporter.workbook.predefinedFormatters.currency.id}},
+                            {value:payment_request_stats.drawnTotal, metadata:{style: Reporter.workbook.predefinedFormatters.currency.id}},
+                            {value:(Number(grant[Reporter.fieldMap.grant.budget]) - payment_request_stats.drawnTotal), metadata:{style: Reporter.workbook.predefinedFormatters.currency.id}},
+                            grant[Reporter.fieldMap.grant.ends],
+                            grant[Reporter.fieldMap.grant.comments],
                             payment_request_stats.lastPaid.servicePeriod,
                             payment_request_stats.lastInvoiced.servicePeriod
                         ]);
@@ -100,46 +250,30 @@
 
                 }
 
-                var processReport = function(data) {
+                Reporter.reportGrantData = function(payment_requests) {
 
-                    var summaryReport = new SummaryReport();
-                    var columns = [
-                        {id: 'grant_id', name: "Grant ID", type: 'string', width: 50},
-                        {id: 'provider', name:"Provider", type: 'string', width: 50},
-                        {id: 'budget', name: "Total Budget", type: 'number', style: summaryReport.predefinedFormatters.currency.id},
-                        {id: 'drawn', name: "Total Drawn", type: 'number', style: summaryReport.predefinedFormatters.currency.id},
-                        {id: 'remainder', name: "Remainder", type: 'number', style: summaryReport.predefinedFormatters.currency.id},
-                        {id: 'endDate', name: "End Date", type: 'date', style: summaryReport.predefinedFormatters.date.id, width: 15},
-                        {id: 'comments', name: "Comments", type: 'string', width: 100},
-                        {id: 'lastPaid', name: "Last Period Paid", type: 'string', width: 50},
-                        {id: 'lastInvoiced', name: "Last Period Invoiced", type: 'string', width: 50}
-                    ];
+                    var parsed = [];
 
-                    var worksheetData = [
-                        [
-                            {value: "Grant ID", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "Provider", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "Budget", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "Drawn", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "Remainder", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "End Date", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "Comments", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "Last Paid Period", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}},
-                            {value: "Last Invoiced Period", metadata: {style: summaryReport.predefinedFormatters.header.id, type: 'string'}}
-                        ]
-                    ].concat(data);
+                    _.each(payment_requests, function(payment, index) {
 
-                    summaryReport.setHeader([
-                        {bold: true, text: "Grant Summary Report"}, "", ""
-                    ]);
-                    summaryReport.setData(worksheetData);
-                    summaryReport.setColumns(columns);
-                    summaryReport.setFooter([
-                        '', '', 'Page &P of &N'
-                    ]);
+                        parsed.push([
+                            payment[Reporter.fieldMap.payment_request.received],
+                            payment[Reporter.fieldMap.payment_request.service_period],
+                            {value:Number(payment[Reporter.fieldMap.payment_request.drawdown]), metadata:{style: Reporter.workbook.predefinedFormatters.currency.id}},
+                            payment[Reporter.fieldMap.payment_request.status]
+                        ]);
+
+                    });
+
+                    return parsed;
+
+                }
+
+                Reporter.setupDownloader = function() {
+
                     if('download' in document.createElement('a')){
                         $("#downloader").attr({
-                            href: "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"+builder.createFile(summaryReport.prepare())
+                            href: "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"+builder.createFile(Reporter.workbook.prepare())
                         });
                     } else {
                         Downloadify.create('downloader',{
@@ -147,7 +281,7 @@
                                     return "grant_report.xlsx";
                             },
                             data: function(){
-                                    return builder.createFile(summaryReport.prepare());
+                                    return builder.createFile(Reporter.workbook.prepare());
                             },
                             swf: '/js/excel-builder/report/downloadify/media/downloadify.swf',
                             downloadImage: '/js/excel-builder/report/downloadify/images/download.png',
@@ -159,30 +293,413 @@
                         });
                     }
 
+                    setTimeout(function() {
+                        $('#complete').show();
+                        $('#loader').hide();
+                        $('#initiate').prop('disabled', false);
+                    }, 1000);
+
                 }
 
-                //Detect access token in URL.
-                //  If not present, redirect to AUTH endpoint
-                //  If present
-                //      Connect with Zengine API
-                //      Lookup user Grants, with associated Provider + PaymentRequests
+                Reporter.buildReportGrantPages = function(data) {
 
-                $.ajax({
-                    url: 'http://127.0.0.1:4000/js/excel-builder/report/testreport.json',
-                    dataType: 'json',
-                    type: 'GET',
-                    success: function(response) {
+                    return new Promise(function(resolve, reject) {
 
-                        report_data = prepareReportData(response.data);
+                        try {
 
-                        processReport(report_data);
+                            var grantData;
 
-                        $('#status').text('Report Complete');
-                        $('#complete').show();
+                            var columns = [
+                                {id: 'received', name: "Received", type: 'date', width: 40},
+                                {id: 'servicePeriod', name:"Service Period", type: 'string', width: 40},
+                                {id: 'drawdown', name: "Drawdown Amount", type: 'string', width: 60},
+                                {id: 'status', name: "Status", type: 'string', width: 40}
+                            ];
+
+                            var grantHeader = [
+                                [
+                                    {value: "Received", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Service Period", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Drawdown Amount", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Status", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}}
+                                ]
+                            ];
+
+                            _.each(data, function(grant) {
+
+                                //Summary info
+                                grantData = [
+                                    [
+                                        {value: grant[Reporter.fieldMap.grant.id], metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                        {value: grant[Reporter.fieldMap.grant.provider_id].name, metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                        {value: grant[Reporter.fieldMap.grant.project], metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}}
+                                    ],
+                                    [
+                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                        {value: 'Grant Budget:', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                        {value:Number(grant[Reporter.fieldMap.grant.budget]), metadata:{style: Reporter.workbook.predefinedFormatters.currencyheader.id}},
+                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}}
+                                    ]
+                                ];
+
+                                grantData = grantData.concat(grantHeader.concat(Reporter.reportGrantData(grant.payment_requests)));
+
+                                grantData = grantData.concat([
+                                    [
+                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                        {
+                                            value: '=SUM(C4:C' + (grant.payment_requests.length + 3) + ')',
+                                            metadata: {
+                                                type: 'formula',
+                                                style: Reporter.workbook.predefinedFormatters.currencyheader.id
+                                            }
+                                        },
+                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}}
+                                    ]
+                                ]);
+
+                                Reporter.workbook.addWorksheet(grant[Reporter.fieldMap.grant.id], columns, grantData);
+
+                            });
+
+                            resolve();
+
+                        } catch (err) {
+                            console.log('buildReportGrantPages');
+                            reject(err);
+                        }
+
+                    });
+
+                }
+
+                Reporter.buildReportSummary = function(data) {
+
+                    return new Promise(function(resolve, reject) {
+
+                        try {
+
+                            Reporter.workbook = new ContractOfficerReport();
+
+                            var parsedData = Reporter.reportSummaryData(data);
+
+                            var columns = [
+                                {id: 'grant_id', name: "Grant ID", type: 'string', width: 30},
+                                {id: 'provider', name:"Provider", type: 'string', width: 20},
+                                {id: 'project', name:"Project", type: 'string', width: 20},
+                                {id: 'budget', name: "Total Budget", type: 'number', style: Reporter.workbook.predefinedFormatters.currency.id, width:30},
+                                {id: 'drawn', name: "Total Drawn", type: 'number', style: Reporter.workbook.predefinedFormatters.currency.id, width:30},
+                                {id: 'remainder', name: "Remainder", type: 'number', style: Reporter.workbook.predefinedFormatters.currency.id, width:30},
+                                {id: 'endDate', name: "End Date", type: 'date', style: Reporter.workbook.predefinedFormatters.date.id, width: 15},
+                                {id: 'comments', name: "Comments", type: 'string', width: 40},
+                                {id: 'lastPaid', name: "Last Period Paid", type: 'string', width: 15},
+                                {id: 'lastInvoiced', name: "Last Period Invoiced", type: 'string', width: 15}
+                            ];
+
+                            var summaryData = [
+                                [
+                                    {value: "Grant ID", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Provider", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Project", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Budget", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Drawdown", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Remainder", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "End Date", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Comments", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Last Paid Period", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}},
+                                    {value: "Last Invoiced Period", metadata: {style: Reporter.workbook.predefinedFormatters.header.id, type: 'string'}}
+                                ]
+                            ].concat(parsedData);
+
+                            Reporter.workbook.addWorksheet('Summary Report', columns, summaryData);
+
+                            resolve(data);
+
+                        } catch (err) {
+                            console.log('buildReportSummary');
+                            reject(err);
+                        }
+
+                    });
+
+                }
+
+                Reporter.verifyToken = function() {
+
+                    return new Promise(function(resolve, reject) {
+
+                        try {
+
+                            if (!params || !params['access_token']) {
+                                reject({
+                                    error: 'Missing access token'
+                                });
+                            } else {
+
+                                $.ajax({
+                                    url: 'https://auth.zenginehq.com/oauth2/v1/token',
+                                    data: {
+                                        access_token: params['access_token']
+                                    },
+                                    success: function(response) {
+
+                                        if (response && response.client_id) {
+
+                                            resolve();
+
+                                        } else {
+
+                                            reject(response);
+
+                                        }
+
+                                    },
+                                    error: function(response) {
+
+                                        reject(response);
+
+                                    }
+                                });
+
+                            }
+
+                        } catch (err) {
+                            reject(err);
+                        }
+
+                    });
+
+                }
+
+                Reporter.getAccessToken = function() {
+
+                    $('#auth-alert').show();
+
+                }
+
+                Reporter.getUser = function() {
+
+                    return new Promise(function(resolve, reject) {
+
+                        try {
+
+                            $.ajax({
+                                url: 'https://api.zenginehq.com/v1/users',
+                                data: {
+                                    access_token: params['access_token'],
+                                    username: Reporter.username
+                                },
+                                success: function(response) {
+
+                                    if (response && response.data && response.data[0].id) {
+
+                                        resolve(response.data[0].id);
+
+                                    } else {
+
+                                        reject(response);
+
+                                    }
+
+                                },
+                                error: function(response) {
+
+                                    reject(response);
+
+                                }
+                            });
+
+                        } catch (err) {
+                            reject(err);
+                        }
+
+                    });
+
+                }
+
+                Reporter.getPaymentRequests = function(grant) {
+
+                    return new Promise(function(resolve, reject) {
+
+                        try {
+
+                            var query_data = {
+                                access_token: params['access_token'],
+                                sort: Reporter.fieldMap.payment_request.received,
+                                limit: 100,
+                            };
+
+                            query_data[Reporter.fieldMap.payment_request.grant_id] = grant.id;
+
+                            $.ajax({
+                                url: 'https://api.zenginehq.com/v1/forms/' + Reporter.grantFormId + '/records.json',
+                                data: query_data,
+                                dataType: 'json',
+                                type: 'GET',
+                                success: function(response) {
+
+                                    if (response && response.status === 200) {
+
+                                        resolve(response.data || []);
+
+                                    } else {
+
+                                        reject(response);
+
+                                    }
+
+                                },
+                                error: function(response) {
+
+                                    reject(response);
+
+                                }
+                            });
+
+                        } catch (err) {
+                            reject(err);
+                        }
+
+                    });
+
+                }
+
+                Reporter.getGrantsData = function(grants) {
+
+                    return new Promise(function(resolve, reject) {
+
+                        if (!grants || !grants.length) {
+
+                            reject({error: 'No grants found!'});
+
+                        } else {
+
+                            var grants_to_fetch = grants.length;
+
+                            grants.forEach(function(grant, index, list) {
+
+                                Reporter.getPaymentRequests(grant)
+                                    .then(function(payment_requests) {
+
+                                        grants[index].payment_requests = payment_requests;
+
+                                        grants_to_fetch--;
+
+                                        if (grants_to_fetch === 0) {
+                                            console.log(grants);
+                                            resolve(grants);
+                                        }
+
+                                    })
+                            });
+
+                        }
+
+                    });
+
+                }
+
+                Reporter.getGrants = function(user_id) {
+
+                    return new Promise(function(resolve, reject) {
+
+                        try {
+
+                            var query_data = {
+                                access_token: params['access_token'],
+                                limit: 100
+                            }
+
+                            query_data[Reporter.fieldMap.grant.is_archived] = 'no';
+                            query_data[Reporter.fieldMap.grant.contract_user_id] = user_id;
+
+                            $.ajax({
+                             url: 'https://api.zenginehq.com/v1/forms/' + Reporter.paymentRequestFormId + '/records.json',
+                                data: query_data,
+                                dataType: 'json',
+                                type: 'GET',
+                                success: function(response) {
+
+                                    if (response && response.status === 200) {
+
+                                        console.log('grants succcess', response);
+                                        resolve(response.data || []);
+
+                                    } else {
+
+                                        console.log('grants fail', response);
+                                        reject(response);
+
+                                    }
+
+                                },
+                                error: function(response) {
+
+                                    reject(response);
+
+                                }
+                            });
+
+                        } catch (err) {
+                            reject(err);
+                        }
+
+                    });
+
+                }
+
+                Reporter.errorHandler = function(err) {
+
+                    console.log(err);
+
+                    var message = 'Unknown error.';
+
+                    if (err) {
+
+                        if (err.error_description) {
+                            message = err.error ? (err.error + ': ' + err.error_description) : error.error_description;
+                        } else if (err.error) {
+                            message = err.error;
+                        }
 
                     }
-                });
 
+                    $('#loader').hide();
+                    $('#error-alert').show().find('p').text(message);
+                    $('#initiate').prop('disabled', false);
+
+                }
+
+                $(document).ready(function() {
+
+                    if (!params || !params['access_token']) {
+                        $('#auth-alert').show();
+                    }
+
+                    $('#report-generator').on('submit', function(e) {
+
+                        e.preventDefault();
+
+                        Reporter.username = $('#username').val();
+
+                        $('#initiate').prop('disabled', true);
+                        $('#error-alert').hide();
+                        $('#complete').hide();
+                        $('#loader').show();
+
+                        Reporter.verifyToken()
+                        .then(Reporter.getUser, Reporter.getAccessToken)
+                        .then(Reporter.getGrants, Reporter.errorHandler)
+                        .then(Reporter.getGrantsData, Reporter.errorHandler)
+                        .then(Reporter.buildReportSummary, Reporter.errorHandler)
+                        .then(Reporter.buildReportGrantPages, Reporter.errorHandler)
+                        .then(Reporter.setupDownloader, Reporter.errorHandler);
+
+                    });
+
+                });
 
             });
 

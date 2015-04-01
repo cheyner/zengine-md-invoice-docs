@@ -1,13 +1,12 @@
 define(['../Excel/Workbook', '../Excel/Table'], function (Workbook, Table) {
 	var Template = function (worksheetConstructorSettings) {
+
 		this.workbook = new Workbook();
 		this.stylesheet = this.workbook.getStyleSheet();
 
 		this.columns = {};
 
-		this.predefinedStyles = {
-
-		};
+		this.predefinedStyles = {};
 
 		this.predefinedFormatters = {
 			date: this.stylesheet.createSimpleFormatter('date'),
