@@ -1,7 +1,5 @@
 <html>
     <head>
-        <base href="https://cheyner.github.io/zengine-md-invoice-docs/">
-        <!-- <base href="http://127.0.0.1:4000/"> -->
         <script type="text/javascript" src="js/excel-builder/report/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="js/excel-builder/report/require.js"></script>
         <script type="text/javascript" src="js/excel-builder/report/underscore-min.js"></script>
@@ -10,7 +8,7 @@
         <script type="text/javascript" src="js/excel-builder/report/downloadify/js/swfobject.js"></script>
         <script type="text/javascript" src="js/excel-builder/report/downloadify/js/downloadify.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic">
     </head>
     <body>
@@ -32,7 +30,8 @@
                                 Please click the button below and login to your Zengine account.
                             </p>
 
-                            <a class="btn btn-danger" href="https://auth.zenginehq.com/oauth2/v1/authorize?client_id=f11ead3a1a5bcfe11f31b2886904c21bd49c&response_type=token&state=XXXX">Authorize Access to Zengine</a>
+                            <!-- <a class="btn btn-danger" href="https://auth.zenginehq.com/oauth2/v1/authorize?client_id=f11ead3a1a5bcfe11f31b2886904c21bd49c&response_type=token&state=XXXX">Authorize Access to Zengine</a> -->
+                            <a class="btn btn-danger" href="https://auth.zenginehq.com/oauth2/v1/authorize?client_id=6ba2942bf11491f4fb03586012428d8405de&response_type=token&state=XXXX">Authorize Access to Zengine</a>
 
                         </div>
 
@@ -216,8 +215,6 @@
 
                     });
 
-                    console.log('stats', stats);
-
                     return stats;
 
                 }
@@ -367,7 +364,6 @@
                             resolve();
 
                         } catch (err) {
-                            console.log('buildReportGrantPages');
                             reject(err);
                         }
 
@@ -458,7 +454,7 @@
                                     },
                                     error: function(response) {
 
-                                        reject(response);
+                                        reject({error: 'There was an error trying to verify your authorization token.'});
 
                                     }
                                 });
@@ -470,12 +466,6 @@
                         }
 
                     });
-
-                }
-
-                Reporter.getAccessToken = function() {
-
-                    $('#auth-alert').show();
 
                 }
 
@@ -499,14 +489,14 @@
 
                                     } else {
 
-                                        reject(response);
+                                        reject({error: 'User not found!'});
 
                                     }
 
                                 },
                                 error: function(response) {
 
-                                    reject(response);
+                                    reject({error: 'There was an error trying to retrieve user information.'});
 
                                 }
                             });
@@ -553,7 +543,7 @@
                                 },
                                 error: function(response) {
 
-                                    reject(response);
+                                    reject({error: 'There was an error trying to request payment request data.'});
 
                                 }
                             });
@@ -588,7 +578,6 @@
                                         grants_to_fetch--;
 
                                         if (grants_to_fetch === 0) {
-                                            console.log(grants);
                                             resolve(grants);
                                         }
 
@@ -624,12 +613,10 @@
 
                                     if (response && response.status === 200) {
 
-                                        console.log('grants succcess', response);
                                         resolve(response.data || []);
 
                                     } else {
 
-                                        console.log('grants fail', response);
                                         reject(response);
 
                                     }
@@ -637,7 +624,7 @@
                                 },
                                 error: function(response) {
 
-                                    reject(response);
+                                    reject({error: 'There was an error trying to request grant data.'});
 
                                 }
                             });
@@ -650,9 +637,15 @@
 
                 }
 
-                Reporter.errorHandler = function(err) {
+                Reporter.getAccessToken = function(err) {
 
-                    console.log(err);
+                    $('#auth-alert').show();
+                    throw(err);
+
+                }
+
+
+                Reporter.errorHandler = function(err) {
 
                     var message = 'Unknown error.';
 
@@ -669,6 +662,14 @@
                     $('#loader').hide();
                     $('#error-alert').show().find('p').text(message);
                     $('#initiate').prop('disabled', false);
+
+                    throw(err);
+
+                }
+
+                Reporter.finalError = function(err) {
+
+                    console.log('final', err);
 
                 }
 
@@ -695,7 +696,8 @@
                         .then(Reporter.getGrantsData, Reporter.errorHandler)
                         .then(Reporter.buildReportSummary, Reporter.errorHandler)
                         .then(Reporter.buildReportGrantPages, Reporter.errorHandler)
-                        .then(Reporter.setupDownloader, Reporter.errorHandler);
+                        .then(Reporter.setupDownloader, Reporter.errorHandler)
+                        .then(null, Reporter.finalError);
 
                     });
 
