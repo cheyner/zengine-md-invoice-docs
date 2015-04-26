@@ -23,10 +23,20 @@
           require: 'ngModel',
           link: function (scope, element, attrs, ctrl) {
               ctrl.$formatters.push(function (data) {
-                  var formatted = $filter('currency')(data);
-                  console.log(formatted);
-                  //convert data from model format to view format
-                  return formatted; //converted
+
+                  if (data) {
+
+                    var formatted = $filter('currency')(data);
+                    //convert data from model format to view format
+                    return formatted; //converted
+
+                  } else {
+
+                    return '';
+
+                  }
+
+
               });
               ctrl.$parsers.push(function (data) {
                   var plainNumber = data.replace(/[^\d|\-+|\+]/g, '');

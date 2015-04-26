@@ -3,6 +3,7 @@
 
   <head>
       <base href="https://cheyner.github.io/zengine-md-invoice-docs/">
+      <!-- <base href="http://127.0.0.1:4000/"> -->
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=8">
       <title>Miami Dade Check Request Form</title>
@@ -29,6 +30,10 @@
 
         .table th {
           width: 200px;
+        }
+
+        #is-adjustment {
+          text-align: left;
         }
 
         .notes {
@@ -137,7 +142,7 @@
 
             <tr>
               <th>Is Adjustment?</th>
-              <td>
+              <td id="is-adjustment">
                 <input type="checkbox" ng-model="params.is_adjustment" ng-true-value="'Yes'" />
               </td>
             </tr>
