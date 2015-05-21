@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html ng-app="mdDocApp" class="ng-scope">
+
+  <head>
+      <base href="https://cheyner.github.io/zengine-md-invoice-docs/">
+      <!-- <base href="http://127.0.0.1:4000/"> -->
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=8">
+      <title>Miami Dade Check Request Form</title>
+
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+      <script type="text/javascript" src="js/angular.min.js"></script>
+      <script type="text/javascript" src="js/angular-route.min.js"></script>
+      <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+      <script type="text/javascript" src="js/controllers.js"></script>
+
+      <style>
+
+        .vertical-table th {
+          text-align: right;
+          width:140px;
+          background-color: #f9f9f9;
+        }
+
+        .vertical-table td {
+          text-align: left;
+          padding-left: 5px;
+        }
+
+        .vertical-table input {
+          width: 200px;
+        }
+
+        input {
+          border: 0;
+          width: 100%;
+        }
+
+        .checkbox input {
+          width: auto;
+        }
+
+        .signature-container {
+          clear:left;
+          padding: 10px 0 0;
+        }
+
+        .who {
+          width: 140px;
+          text-align: right;
+        }
+
+        .who, .signature, .date  {
+          float: left;
+        }
+
+        .signature, .date {
+          margin: 20px 10px;
+          border-top: 1px solid #000;
+          width: 300px;
+          text-align: center;
+        }
+
+        .date {
+          width: 200px;
+        }
+
+      </style>
+
+  </head>
+
+  <body ng-controller="DataCtrl" class="ng-scope">
+
+    <div class="container">
+
+      <div class="row" style="margin-bottom:20px;">
+
+        <div class="col-xs-8">
+
+          <h2>
+            Miami Dade County
+            <br /><small>Department:  Homeless Trust</small>
+          </h2>
+
+          <textarea rows="4" style="border:1px solid #000; width:300px; padding: 2px;">TO:</textarea>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="is_electronic_transfer" checked="true" />
+              Electronic Transfer
+            </label>
+          </div>
+
+
+        </div>
+
+        <div class="col-xs-4">
+
+          <h1>Drawdown</h1>
+
+          <div style="border:1px solid #000;padding:2px;">
+
+            <table class="vertical-table">
+              <tbody>
+                <tr>
+                  <th>DATE:</th>
+                  <td><input type="text" /></td>
+                </tr>
+                <tr>
+                  <th>AMOUNT:</th>
+                  <td><input type="text" ng-model="params.amount" /></td>
+                </tr>
+                <tr>
+                  <th>FROM:</th>
+                  <td><input type="text" value="Victoria L. Mallette" /></td>
+                </tr>
+                <tr>
+                  <th>PHONE:</th>
+                  <td><input type="text" value="305-375-1490" /></td>
+                </tr>
+                <tr>
+                  <th>FAX:</th>
+                  <td><input type="text" value="305-372-2722" /></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div style="border:1px solid #000; padding: 2px;">
+
+            <table class="vertical-table">
+              <tbody>
+                <tr>
+                  <th>GRANT ID:</th>
+                  <td><input type="text" ng-model="params.grant_id" /></td>
+                </tr>
+                <tr>
+                  <th>PROVIDER:</th>
+                  <td><input type="text" ng-model="params.provider_name" /></td>
+                </tr>
+                <tr>
+                  <th>PROJECT:</th>
+                  <td><input type="text" ng-model="params.project_name" /></td>
+                </tr>
+                <tr>
+                  <th>SERVICE PERIOD:</th>
+                  <td><input type="text" ng-model="params.service_period" /></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <table class="table table-condensed table-bordered">
+
+        <thead>
+          <tr class="active">
+            <th colspan="5">DRAWDOWN</th>
+          </tr>
+          <tr class="info">
+            <th>DATE</th>
+            <th>BANK</th>
+            <th>BANK A/C#</th>
+            <th>AMOUNT</th>
+            <th>GRANT NAME</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td style="width:100px;"><input type="text" style="width:90px;" /></td>
+            <td>on file</td>
+            <td><input type="text" value="2696206696688" /></td>
+            <td><input type="text" ng-model="params.amount" /></td>
+            <td><input type="text" /></td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <table class="table table-condensed table-bordered">
+
+        <thead>
+          <tr class="active">
+            <th colspan="6">FUNDING AGENCY</th>
+          </tr>
+          <tr class="info">
+            <th>NAME (FED, STATE, OTHER)</th>
+            <th>CONTACT</th>
+            <th>PHONE</th>
+            <th>INDEX</th>
+            <th>GRANT NO.</th>
+            <th>BANK G/L NO.</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><input type="text" value="USHUD" /></td>
+            <td><input type="text" value="A.L. Bellini" /></td>
+            <td><input type="text" value="305-536-5678" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text"  value="108" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <p>Please fax us corresponding ACH acknowledgment</p>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="additional_info" />
+          Additional information attached on separate memo.
+        </label>
+      </div>
+
+
+      <div class="signature-container clearfix">
+
+        <span class="who">Authorized Signature:</span>
+        <span class="signature">Signature</span>
+        <span class="date">Date</span>
+
+      </div>
+
+
+    </div>
+
+  </body>
+
+</html>
