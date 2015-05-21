@@ -108,7 +108,7 @@
                 </tr>
                 <tr>
                   <th>AMOUNT:</th>
-                  <td><input type="text" ng-model="params.amount" /></td>
+                  <td><input type="text" ng-model="params.amount | currency" /></td>
                 </tr>
                 <tr>
                   <th>FROM:</th>
@@ -136,11 +136,11 @@
                 </tr>
                 <tr>
                   <th>PROVIDER:</th>
-                  <td><input type="text" ng-model="params.provider_name" /></td>
+                  <td><input type="text" ng-model="params.provider" /></td>
                 </tr>
                 <tr>
                   <th>PROJECT:</th>
-                  <td><input type="text" ng-model="params.project_name" /></td>
+                  <td><input type="text" ng-model="params.project" /></td>
                 </tr>
                 <tr>
                   <th>SERVICE PERIOD:</th>
@@ -175,7 +175,7 @@
             <td style="width:100px;"><input type="text" style="width:90px;" /></td>
             <td>on file</td>
             <td><input type="text" value="2696206696688" /></td>
-            <td><input type="text" ng-model="params.amount" /></td>
+            <td><input type="text" ng-model="params.amount | currency" /></td>
             <td><input type="text" /></td>
           </tr>
         </tbody>
