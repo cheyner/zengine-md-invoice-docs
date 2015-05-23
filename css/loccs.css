@@ -17,7 +17,25 @@ input {
     left: 43px;
     font-weight: bold;
     font-size: 14px;
-    width:300px;
+    width:200px;
+}
+
+#grantee_org {
+    position: absolute;
+    top: 288px;
+    left: 245px;
+    font-weight: bold;
+    font-size: 14px;
+    width:250px;
+}
+
+#grantee_tin {
+    position: absolute;
+    top: 320px;
+    left: 245px;
+    font-weight: bold;
+    font-size: 14px;
+    width:250px;
 }
 
 #service_period {

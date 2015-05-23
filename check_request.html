@@ -43,8 +43,7 @@
         .notes {
           width:500px;
           border:1px solid #ddd;
-          height:70px;
-          margin-bottom:25px;
+          margin-bottom:15px;
         }
 
         .signature-container {
@@ -106,6 +105,13 @@
               </td>
             </tr>
 
+            <tr>
+              <th>Project Name</th>
+              <td>
+                <input type="text" ng-model="params.project" />
+              </td>
+            </tr>
+
           </table>
 
           <table class="table table-bordered">
@@ -158,35 +164,35 @@
 
           </table>
 
-          <h5>Check Type Notes</h5>
-          <textarea class="notes"></textarea>
+          <h5>Notes</h5>
+          <textarea class="notes" rows="2"></textarea>
 
-          <h5>Special Handling Notes</h5>
-          <textarea class="notes"></textarea>
+          <div class="signature-container clearfix">
 
-              <div class="signature-container clearfix">
+            <span class="who">Submitted by:</span>
+            <span class="signature">Signature</span>
+            <span class="date">Date</span>
 
-                <span class="who">Submitted by:</span>
-                <span class="signature">Signature</span>
-                <span class="date">Date</span>
+          </div>
 
-              </div>
+          <div class="signature-container clearfix">
 
-              <div class="signature-container clearfix">
+            <span class="who">Approved by:</span>
+            <span class="signature">Signature</span>
+            <span class="date">Date</span>
 
-                <span class="who">Approved by:</span>
-                <span class="signature">Signature</span>
-                <span class="date">Date</span>
+          </div>
 
-              </div>
+          <div class="signature-container clearfix">
 
-              <div class="signature-container clearfix">
+            <span class="who">C.F.O.:</span>
+            <span class="signature">Signature</span>
+            <span class="date">Date</span>
 
-                <span class="who">C.F.O.:</span>
-                <span class="signature">Signature</span>
-                <span class="date">Date</span>
+          </div>
 
-              </div>
+          <br />
+          Date Submitted To Finance:  _______________________
 
         </div>
 
