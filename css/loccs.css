@@ -20,6 +20,18 @@ input {
     width:200px;
 }
 
+#disbursement_partial {
+    position: absolute;
+    top: 241px;
+    left: 660px;
+}
+
+#disbursement_final {
+    position: absolute;
+    top: 241px;
+    left: 744px;
+}
+
 #grantee_org {
     position: absolute;
     top: 288px;
