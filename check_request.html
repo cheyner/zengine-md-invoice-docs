@@ -25,7 +25,7 @@
         }
 
         .table {
-          width: 500px;
+          width: 635px;
         }
 
         .table th {
@@ -126,7 +126,7 @@
             <tr>
               <th>Grant Start Date</th>
               <td>
-                <input type="text" ng-model="params.grant_start" />
+                <input type="text" ng-model="params.grant_start | date:'MM-dd-yyyy'" />
               </td>
             </tr>
 
@@ -144,7 +144,7 @@
             <tr>
               <th>Invoice Received</th>
               <td>
-                <input type="text" ng-model="params.received" />
+                <input type="text" ng-model="params.received | date:'MM-dd-yyyy'" />
               </td>
             </tr>
 
