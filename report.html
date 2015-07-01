@@ -342,20 +342,24 @@
 
                                 grantData = grantData.concat(grantHeader.concat(Reporter.reportGrantData(grant.payment_requests)));
 
-                                grantData = grantData.concat([
-                                    [
-                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
-                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
-                                        {
-                                            value: '=SUM(C4:C' + (grant.payment_requests.length + 3) + ')',
-                                            metadata: {
-                                                type: 'formula',
-                                                style: Reporter.workbook.predefinedFormatters.currencyheader.id
-                                            }
-                                        },
-                                        {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}}
-                                    ]
-                                ]);
+                                if (grant.payment_requests.length > 0) {
+
+                                    grantData = grantData.concat([
+                                        [
+                                            {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                            {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}},
+                                            {
+                                                value: '=SUM(C4:C' + (grant.payment_requests.length + 3) + ')',
+                                                metadata: {
+                                                    type: 'formula',
+                                                    style: Reporter.workbook.predefinedFormatters.currencyheader.id
+                                                }
+                                            },
+                                            {value: '', metadata:{style: Reporter.workbook.predefinedFormatters.subheader.id}}
+                                        ]
+                                    ]);
+
+                                }
 
                                 Reporter.workbook.addWorksheet(grant[Reporter.fieldMap.grant.id], columns, grantData);
 
